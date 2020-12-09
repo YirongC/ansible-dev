@@ -1,0 +1,13 @@
+- name: copy nginx.conf
+  copy:
+    src: nginx.conf
+    dest: nginx/nginx.conf
+
+- name: install nginx
+  ansible.builtin.package:
+    name: "nginx"
+    state: "{{nginx_status}}"
+  become: True
+  notify:
+  - my_handler
+

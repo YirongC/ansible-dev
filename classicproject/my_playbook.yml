@@ -1,0 +1,29 @@
+- name: Thursday Challenge
+  hosts: planetexpress
+  gather_facts: yes
+
+  pre_tasks:
+    - name: create a ~/nginx directory, and calls on a handler if this made a change (debug)
+      file:
+        path: ~/nginx/
+        state: directory
+      notify:
+        - directory_created
+
+
+
+  roles:
+    - testrole
+
+  tasks:
+    - name: perfrom an "ls" command on the home directory
+      shell: ls ~ >> ~/myoutput.txt
+
+  post_tasks:
+    - name: remove the ~/nginx directory
+      shell: rm -r ~/nginx
+
+  handlers:
+    - name: directory_created
+      debug:
+        msg: directory is created

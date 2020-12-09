@@ -1,0 +1,28 @@
+- name: a test
+  hosts: planetexpress
+  gather_facts: yes
+  vars_files: 
+    - vars/myvars.yml
+
+  tasks:
+    - name: debug
+      debug:
+        msg: "test"
+
+    - name: apt Install cowsay when ansible_distribution == "Ubuntu"
+      apt:
+        name:  cowsay 
+        state: present
+      become: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: yum Install cowsay when ansible_distribution == "CentOS"
+      yum:
+        name: cowsay 
+        state: present
+      become: yes
+      when: ansible_distribution == "CentOS"
+    - name: loop through list of shell commands
+      shell: "{{ item }}"
+      loop: "{{ commands }}"
+

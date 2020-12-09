@@ -1,0 +1,5 @@
+---
+# handlers file for testrole
+- name: my_handler
+  debug:
+    msg: "from my_handler"

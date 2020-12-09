@@ -1,0 +1,3 @@
+---
+# defaults file for testrole
+nginx_status: absent
